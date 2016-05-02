@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>测试IOS与JS之前的互调</title>
+        <style type="text/css">
+            * {
+                font-size: 40px;
+                color:red;
+            }
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <div style="margin-top: 100px">
+            
+            <h1>Test how to use swift call js</h1>
+            
+            <input type="button" value="Call ObjC system camera" onclick="OCModel.callSystemCamera()">
+                
+            <input type="button" value="Call ObjC system alert" onclick="OCModel.showAlertMsg('js title', 'js message')"></div>
+        
+        <div>
+            <input type="button" value="Call ObjC func with JSON " onclick="OCModel.callWithDict({'name': 'testname', 'age': 10, 'height': 170})">
+                
+                <input type="button" value="Call ObjC func with JSON and ObjC call js func to pass args." onclick="OCModel.jsCallObjcAndObjcCallJsWithDict({'name': 'testname', 'age': 10, 'height': 170})">
+                    
+                    <button onclick="myFunction()">点击这里</button>
+                    
+                    </div>
+        
+        <div>
+            <span id="jsParamFuncSpan" style="color: red; font-size: 50px;"></span>
+        </div>
+        
+        <script type="text/javascript">
+            
+        function jsFunc()
+        {
+           var ojb = jsb.reflection.callStaticMethod("ViewController","getInfo");
+        }
+        
+        var jsParamFunc = function(argument)
+        {
+            
+            document.getElementById('jsParamFuncSpan').innerHTML = argument['name'];
+        }
+        
+        var jsFunc1 = function myFunction()
+        {
+            
+            
+            alert("Hello World!");
+        }
+        
+            </script>
+    </body>
+</html>

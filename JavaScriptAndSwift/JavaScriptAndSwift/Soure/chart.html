@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>天跃科技</title>
+	<script type="text/javascript" src="ichart-1.0.js"></script>
+
+	<p id="demo"></p>
+	<script type="text/javascript">
+           $(function tripe(){
+						 
+						 winHeight = document.documentElement.clientHeight;
+                         winWidth = document.documentElement.clientWidth;
+             
+             var data = [
+                         {id:1 ,name : 'Android',value : 52.5,color:'#4572a7'},
+                         {id:2 ,name : 'IOS',value : 34.3,color:'#aa4643'},
+                         {id:3 ,name : 'RIM',value : 8.4,color:'#89a54e'},
+                         {id:4 ,name : 'Microsoft',value : 3.6,color:'#80699b'},
+                         {id:5 ,name : 'Other',value : 1.2,color:'#3d96ae'}
+                         ];
+                         
+             var chart = new iChart.Pie2D(
+             {
+                              
+                          render: 'canvasDiv',
+                          data: data,
+                              
+                      footnote:
+                      {
+                          text: '',
+                          color: '#486c8f',
+                          fontsize: 30,
+                          padding: '038'
+                      },
+                      
+                      sub_option:
+                      {
+                          mini_label_threshold_angle: 40,
+                          //迷你label的阀值单位: 角度
+                          mini_label: 
+                          {
+                              //迷你label配置项
+                              fontsize: 40,
+                              fontweight: 600,
+                              color: '#ffffff'
+					      },
+					         
+                          label:
+                          {
+						       background_color: null,
+						       sign: false,
+						       //设置禁用label的小图标
+						       padding: '04',
+						       border: {
+						           enable: false,
+						           color: '#666666'
+						       },
+						       fontsize: 40,
+						       fontweight: 600,
+						       color: '#4572a7'
+						        
+                          },
+						        
+                          border: 
+                          {
+						       width: 2,
+						       color: '#ffffff'
+						        
+
+						   },
+						         
+                          
+                          listeners: 
+                          {
+                                parseText: function(d,t)
+                                {
+                                     return d.get('value')+"%";
+                                     //自定义label文本
+                                },
+
+                                  // click 事件
+								     click: function informationNext(r,e,p){
+								     	console.log(r.expanded);
+								     	if  (r.expanded) {
+                                          
+                                          document.getElementById("demo").innerHTML = jsFunc(r,e,p);
+								     	}
+							               
+							         }
+
+                              }
+					     
+                      },
+					     
+                                  
+                      
+                      legend: {
+					         enable: true,
+					         padding: 0,
+					         offsetx: winWidth*2/3,
+					         offsety: 0,
+					         color: '#3e576f',
+					         fontsize: 32,
+					         //文本大小
+					         sign_size: 35,
+					         //小图标大小
+					          line_height: 55,
+					         //设置行高
+					         sign_space: 10,
+					         //小图标与文本间距
+					         border: false,
+					         align: 'left',
+					         background_color: null
+					   },
+
+					   shadow: true,
+					   shadow_blur: 6,
+					   shadow_color: '#aaaaaa',
+					   shadow_offsetx: -winWidth*5/7,
+					   shadow_offsety: 0,
+					   background_color: '#f1f1f1',
+					   align: 'right',
+					   //右对齐
+					   offsetx: -winWidth*2/5,
+					   //设置向x轴负方向偏移位置60
+					   pxoffset_angle: -135,
+					   //逆时针偏移120度
+					   width: winWidth,
+					   height: winHeight,
+					   radius: winHeight/3
+                       
+                                          
+					 }
+				 );
+
+
+				 chart.draw();
+
+			 });
+
+
+
+			</script>
+
+	<script type="text/javascript">
+        
+        function jsFunc(r,e,p){
+
+             // function js_call_oc(r,e,p)
+             
+             var id = r.get('id');
+             var src = "ios://jwzhangjie,"
+             var str = src + id
+
+           var iFrame;
+           iFrame = document.createElement("iframe");  
+           iFrame.setAttribute("src", str);
+           iFrame.setAttribute("style", "display:none;");  
+           iFrame.setAttribute("height", "0px");
+           iFrame.setAttribute("width", "0px");  
+           iFrame.setAttribute("frameborder", "0");  
+           document.body.appendChild(iFrame);  
+           
+           // 发起请求后这个iFrame就没用了，所以把它从dom上移除掉  
+         
+          
+             
+
+            // alert('id: ' + r.get('id') + '\nname: ' + r.get('name') +' \n值: '+r.get('value') + ' \n状态:' + (r.expanded ? '即将收起':'即将弹出'));
+        }
+    
+        var jsParamFunc = function(argument){
+            document.getElementById('jsParamFuncSpan').innerHTML = argument['name'];
+        }
+        
+        var jsFunc1 = function myFunction(){
+            alert("Hello World!");
+        }
+
+
+        function js_call_oc(r,e,p)  
+       {  
+           var iFrame;  
+           iFrame = document.createElement("iframe");  
+           iFrame.setAttribute("src", "ios://jwzhangjie");  
+           iFrame.setAttribute("style", "display:none;");  
+           iFrame.setAttribute("height", "0px");  
+           iFrame.setAttribute("width", "0px");  
+           iFrame.setAttribute("frameborder", "0");  
+           document.body.appendChild(iFrame);  
+
+           // 发起请求后这个iFrame就没用了，所以把它从dom上移除掉  
+           iFrame.parentNode.removeChild(iFrame);  
+           iFrame = null;  
+       }
+    
+        </script>
+</head>
+<body>
+	<div id='canvasDiv'></div>
+</body>
+</html>
